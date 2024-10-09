@@ -52,6 +52,21 @@ public class EinkaufsItemController {
         }
     }
 
+    @GetMapping("/einkaufsitems/listid={id}")
+    public ResponseEntity<List<EinkaufsItem>> getEinkaufsItemsByEinkaufsListeId(@PathVariable("id") long id) {
+        try {
+            List<EinkaufsItem> einkaufsItems = einkaufsItemRepository.findByEinkaufsListeId(id);
+
+            if (einkaufsItems.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(einkaufsItems, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/einkaufsitems")
     public ResponseEntity<EinkaufsItem> createEinkaufsItem(@RequestBody EinkaufsItem einkaufsItem) {
         try {
