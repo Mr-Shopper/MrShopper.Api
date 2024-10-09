@@ -56,7 +56,7 @@ public class EinkaufsItemController {
     public ResponseEntity<EinkaufsItem> createEinkaufsItem(@RequestBody EinkaufsItem einkaufsItem) {
         try {
             EinkaufsItem _einkaufsitem = einkaufsItemRepository
-                    .save(new EinkaufsItem(einkaufsItem.getBezeichnung(), true));
+                    .save(new EinkaufsItem(einkaufsItem.getEinkaufsListeId(), einkaufsItem.getBezeichnung(), einkaufsItem.getMenge(), einkaufsItem.getMengenEinheit(), true));
             return new ResponseEntity<>(_einkaufsitem, HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

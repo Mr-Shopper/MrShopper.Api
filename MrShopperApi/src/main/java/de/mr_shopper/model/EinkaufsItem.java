@@ -12,17 +12,29 @@ import lombok.NoArgsConstructor;
 public class EinkaufsItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) // Inkrementiert das Feld automatisch
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "einkaufsListeId")
+    private long einkaufsListeId;
 
     @Column(name = "bezeichnung")
     private String bezeichnung;
 
+    @Column(name = "menge")
+    private double menge;
+
+    @Column(name = "mengenEinheit")
+    private String mengenEinheit;
+
     @Column(name = "aktiv")
     private boolean aktiv;
 
-    public EinkaufsItem(String bezeichnung, boolean aktiv) {
+    public EinkaufsItem(long einkaufsListeId, String bezeichnung, double menge, String mengenEinheit, boolean aktiv) {
+        this.einkaufsListeId = einkaufsListeId;
         this.bezeichnung = bezeichnung;
+        this.menge = menge;
+        this.mengenEinheit = mengenEinheit;
         this.aktiv = aktiv;
     }
 
